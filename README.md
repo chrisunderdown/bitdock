@@ -1,19 +1,18 @@
-# Tray Example
+![Alt text](/icon.png "Bitdock")
+# Bitdock
 
-An example app for building a native-looking Mac OS X tray app with a popover
-using [Electron](http://electron.atom.io).
+A lightweight Mac OSX tray application that tracks the Bitcoin Price Index.
 
-The app shows the weather for the current location and refreshes every 10
-minutes.
+The app sits in the top-menu and shows the value of Bitcoin in either USD, GBP or EUR and refreshes every minute.
 
-Built with [photon](http://photonkit.com).
-Uses the [Dark Sky Forecast API](https://developer.forecast.io).
+Built with [Electron](http://electron.atom.io)
+Uses the [Coindesk API](https://www.coindesk.com/api/.
 
 ## Running
 
 ```sh
-git clone https://github.com/kevinsawicki/tray-example
-cd tray-example
+git clone https://github.com/chrisunderdown/bitdock
+cd bitdock
 npm install
 npm start
 ```
@@ -22,7 +21,5 @@ npm start
 
 ```sh
 npm run package
-open out/Weathered-darwin-x64/Weathered.app
+open out/Bitdock-darwin-x64/Bitdock.app
 ```
-
-![screenshot](https://cloud.githubusercontent.com/assets/671378/15033544/97011f38-1220-11e6-9611-1571063fe107.png)

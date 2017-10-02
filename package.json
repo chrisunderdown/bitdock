@@ -3,7 +3,7 @@
   "productName": "Bitdock",
   "version": "1.0.0",
   "main": "main.js",
-  "license": "ISC",
+  "license": "MIT",
   "author": "Chris Underdown",
   "scripts": {
     "start": "electron .",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kevinsawicki/tray-example.git"
+    "url": "git+https://github.com/chrisunderdown/bitdock.git"
   },
   "bugs": {
-    "url": "https://github.com/kevinsawicki/tray-example/issues"
+    "url": "https://github.com/chrisunderdown/bitdock/issues"
   },
-  "homepage": "https://github.com/kevinsawicki/tray-example#readme",
+  "homepage": "https://github.com/chrisunderdown/bitdock#readme",
   "devDependencies": {
     "electron-packager": "^7.3.0",
     "electron-prebuilt": "^1.2.7"
