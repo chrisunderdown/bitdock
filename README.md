@@ -1,4 +1,4 @@
-![Alt text](/icon.png "Bitdock")
+![Alt text](/icon.png =150x150)
 # Bitdock
 
 A lightweight Mac OSX tray application that tracks the Bitcoin Price Index.
