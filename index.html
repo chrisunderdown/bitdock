@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bitdock</title>
+    <link rel="stylesheet" href="./vendor/css/photon.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="./index.css" media="screen" charset="utf-8">
+    <script charset="utf-8">require('./index')</script>
+  </head>
+  <body>
+    <div class="header-arrow"></div>
+    <div class="window">
+      <header class="toolbar toolbar-header">
+        <h1 class="title">Bitdock<span class="js-update-time"></span></h1>
+      </header>
+
+      <div class="tab-group">
+        <div class="tab-item" data-currency="EUR">
+          <span class="icon"></span>
+          🇪🇺
+        </div>
+        <div class="tab-item active" data-currency="USD">
+          <span class="icon"></span>
+          🇺🇸
+        </div>
+        <div class="tab-item" data-currency="GBP">
+          <span class="icon"></span>
+          🇬🇧
+        </div>
+      </div>
+
+      <div class="window-content">
+        <div class="pane">
+
+          <div class="summary js-summary">Loading&hellip;</div>
+
+
+          <div>
+            <div class="column">
+              <div class="reading light">USD</div>
+              <div class="description light">United States Dollar</div>
+            </div>
+
+            <div class="column">
+              <div class="reading js-usd">&nbsp;</div>
+              <div class="description js-usd-rate">0.0000</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="column">
+              <div class="reading light">GBP</div>
+              <div class="description light">British Pound Sterling</div>
+            </div>
+
+            <div class="column">
+              <div class="reading js-gbp">&nbsp;</div>
+              <div class="description js-gbp-rate">0.0000</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="column">
+              <div class="reading light">EUR</div>
+              <div class="description light">Euro</div>
+            </div>
+
+            <div class="column">
+              <div class="reading reading js-eur">&nbsp;</div>
+              <div class="description js-eur-rate">0.0000</div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <footer class="toolbar toolbar-footer">
+
+        <div class="footer-link">
+          Made by <a href="http://twitter.com/chrisunderdown">@chrisunderdown</a>
+        </div>
+
+        <div class="toolbar-actions pull-right">
+          <div class="btn-group">
+            <button class="btn btn-default js-refresh-action">
+              <span class="icon icon-arrows-ccw js-refresh-action" title="Refresh"></span>
+            </button>
+
+            <button class="btn btn-default js-quit-action">
+              <span class="icon icon-cancel js-quit-action" title="Quit"></span>
+            </button>
+          </div>
+        </div>
+
+      </footer>
+    </div>
+  </body>
+</html>
