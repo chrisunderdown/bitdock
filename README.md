@@ -1,5 +1,5 @@
-<img src="icon.png" style="width: 100px; height: 100px;"/>
 # Bitdock
+<img src="icon.png" />
 
 A lightweight Mac OSX tray application that tracks the Bitcoin Price Index.
 
