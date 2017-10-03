@@ -3,8 +3,10 @@ const dialog = require('electron').dialog
 const path = require('path')
 const AutoLaunch = require('auto-launch')
 
+var appPath = app.getPath('exe').split('.app/Content')[0] + '.app';
 var bitdockAutoLauncher = new AutoLaunch({
-    name: 'Bitdock'
+    name: 'Bitdock',
+    path: appPath
 });
 
 bitdockAutoLauncher.enable();
