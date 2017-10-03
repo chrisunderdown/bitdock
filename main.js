@@ -1,6 +1,23 @@
 const {app, BrowserWindow, ipcMain, Tray} = require('electron')
 const dialog = require('electron').dialog
 const path = require('path')
+const AutoLaunch = require('auto-launch')
+
+var bitdockAutoLauncher = new AutoLaunch({
+    name: 'Bitdock'
+});
+
+bitdockAutoLauncher.enable();
+
+bitdockAutoLauncher.isEnabled()
+.then(function(isEnabled){
+    if(isEnabled){
+        return;
+    }
+    bitdockAutoLauncher.enable();
+})
+.catch(function(err){
+});
 
 const assetsDirectory = path.join(__dirname, 'assets')
 
