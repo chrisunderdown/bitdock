@@ -1,10 +1,11 @@
 # Bitdock
 
-A lightweight Mac OSX tray application that tracks the Bitcoin Price Index.
+A lightweight Mac OSX tray application that tracks the prices of cryptocurrency.
+Currently supports BTC, ETH, LTC, DASH, ZEC, XRP.
 
-The app sits in the top-menu and shows the value of Bitcoin in either USD, GBP or EUR and refreshes every minute.
+The app sits in the top-menu and shows the value of the selected crypto in either USD, GBP or EUR and refreshes every minute.
 
-Built with [Electron](http://electron.atom.io), uses the [Coindesk API](https://www.coindesk.com/api/).
+Built with [Electron](http://electron.atom.io), uses the [CryptoCompare API](https://www.cryptocompare.com/api).
 
 ## Running
 
