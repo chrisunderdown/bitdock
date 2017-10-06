@@ -110,21 +110,21 @@ ipcMain.on('show-window', () => {
   showWindow()
 })
 
-ipcMain.on('bitcoin-updated', (event, bitcoin, currency) => {
+ipcMain.on('crypto-updated', (event, crypto, currency, coin) => {
   // Update icon and title in tray
   switch(currency) {
     case 'USD':
-      tray.setTitle(`$${Math.round(bitcoin.bpi.USD.rate_float)}`)
+      tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
       break;
     case 'GBP':
-      tray.setTitle(`£${Math.round(bitcoin.bpi.GBP.rate_float)}`)
+      tray.setTitle(`${coin} £${Math.round(crypto.GBP)}`)
       break;
     case 'EUR':
-      tray.setTitle(`€${Math.round(bitcoin.bpi.EUR.rate_float)}`)
+      tray.setTitle(`${coin} €${Math.round(crypto.EUR)}`)
       break;
 
     default:
-      tray.setTitle(`$${Math.round(bitcoin.bpi.USD.rate_float)}`)
+      tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
   }
 
   tray.setImage(path.join(assetsDirectory, 'bitcoin.png'))

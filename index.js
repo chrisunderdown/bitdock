@@ -1,5 +1,7 @@
 const {ipcRenderer, shell} = require('electron')
+var coins = ['BTC','ETH']
 var currency = 'USD'
+var usercrypto = 'BTC'
 
 document.addEventListener('click', (event) => {
   if (event.target.href) {
@@ -7,18 +9,26 @@ document.addEventListener('click', (event) => {
     shell.openExternal(event.target.href)
     event.preventDefault()
   } else if (event.target.classList.contains('js-refresh-action')) {
-    updateBitcoin()
+    init()
   } else if (event.target.classList.contains('js-quit-action')) {
     window.close()
   } else if (event.target.classList.contains('tab-item')) {
-    switchCurrency(event)
+    switchLocalCurrency(event)
+  } else if (event.target.classList.contains('coin')) {
+    switchCrypto(event)
   }
 })
 
+function init() {
+  for (var i = 0; i < coins.length; i++) {
+    updateCrypto(coins[i])
+  }
+}
 
-const updateBitcoin = () => {
+const updateCrypto = (coin) => {
 
-  const url = `https://api.coindesk.com/v1/bpi/currentprice.json`
+  // const url = `https://api.coindesk.com/v1/bpi/currentprice.json`
+  const url = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=GBP,USD,EUR`
 
   fetch(url)
   .then(
@@ -29,9 +39,12 @@ const updateBitcoin = () => {
       }
 
       // Examine the text in the response
-      response.json().then(function(bitcoin) {
-        ipcRenderer.send('bitcoin-updated', bitcoin, currency)
-        updateView(bitcoin)
+      response.json().then(function(crypto) {
+        if ( coin === usercrypto) {
+          ipcRenderer.send('crypto-updated', crypto, currency, usercrypto)
+        }
+
+        updateView(coin, crypto)
       });
     }
   )
@@ -42,23 +55,20 @@ const updateBitcoin = () => {
 
 }
 
-const updateView = (bitcoin) => {
+const updateView = (coin, crypto) => {
   document.querySelector('.js-summary').textContent = ''
-  document.querySelector('.js-usd').textContent = `$${Math.round(bitcoin.bpi.USD.rate_float)}`
-  document.querySelector('.js-usd-rate').textContent = bitcoin.bpi.USD.rate
-  document.querySelector('.js-gbp').textContent = `£${Math.round(bitcoin.bpi.GBP.rate_float)}`
-  document.querySelector('.js-gbp-rate').textContent = bitcoin.bpi.GBP.rate
-  document.querySelector('.js-eur').textContent = `€${Math.round(bitcoin.bpi.EUR.rate_float)}`
-  document.querySelector('.js-eur-rate').textContent = bitcoin.bpi.EUR.rate
+  document.querySelector(`.${coin}-js-usd`).textContent = `$${Math.round(crypto.USD)}`
+  document.querySelector(`.${coin}-js-gbp`).textContent = `£${Math.round(crypto.GBP)}`
+  document.querySelector(`.${coin}-js-eur`).textContent = `€${Math.round(crypto.EUR)}`
 }
 
 
 // Refresh currency every 10 minutes
 const oneMinute = 10 * 60 * 100
-setInterval(updateBitcoin, oneMinute)
+setInterval(init, oneMinute)
 
 
-function switchCurrency(event) {
+function switchLocalCurrency(event) {
   var tabs = document.querySelectorAll('.tab-item')
   var local = event.target.dataset.currency
   for (var i = 0; i < tabs.length; i++) {
@@ -66,9 +76,21 @@ function switchCurrency(event) {
   }
   event.target.classList.add('active')
   currency = local
-  updateBitcoin()
+  init()
+}
+
+function switchCrypto(event) {
+  var currencies = document.querySelectorAll('.coin')
+  var curr = event.target.dataset.coin
+  for (var i = 0; i < currencies.length; i++) {
+    currencies[i].classList.remove('active')
+  }
+  event.target.classList.add('active')
+  usercrypto = curr
+  init()
 }
 
 
+
 // Update initial currency when loaded
-document.addEventListener('DOMContentLoaded', updateBitcoin)
+document.addEventListener('DOMContentLoaded', init)

@@ -92,6 +92,10 @@
   margin: auto;
   margin-top: 16px;
   text-align: center;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;*/
 }
 
 .summary {
@@ -105,9 +109,14 @@
 }
 
 .reading {
-  padding: 0 20px;
-  text-align: right;
-  font-size: calc(var(--font-size) + 20px);
+  text-align: left;
+  display: inline;
+  padding: 0 0 0 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
   font-weight: 300;
   color: rgba(255,255,255,1);
 }
@@ -130,7 +139,7 @@
 .description.light {
   text-align: left;
   text-transform: capitalize;
-  padding-left: 20px;
+  padding-left: 30px;
   padding-right: 0;
 }
 
@@ -144,4 +153,60 @@
 
 .footer-link a {
   color: rgba(255,255,255,0.5);
+}
+
+.rates {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 16px;
+}
+.rates span {
+  margin-right: 40px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.rates .value {
+  color: white;
+  font-weight: 300;
+}
+
+.coin {
+  display: flex;
+  background: #141414;
+  padding-bottom: 20px;
+  border-radius: 3px;
+  margin: 10px;
+  transition: 0.25s;
+}
+
+.coin:hover {
+  background: #1D1D1D;
+}
+
+.coin.active {
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.circle {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  height: 8px;
+  width: 8px;
+  background: #FF9F00;
+  border-radius: 100px;
+  margin-right: 10px;
+}
+
+.circle.BTC {
+  background: #FF9F00;
+}
+
+.circle.ETH {
+  background: #858585;
 }
