@@ -9,7 +9,7 @@ document.addEventListener('click', (event) => {
     shell.openExternal(event.target.href)
     event.preventDefault()
   } else if (event.target.classList.contains('js-refresh-action')) {
-    init()
+    update()
   } else if (event.target.classList.contains('js-quit-action')) {
     window.close()
   } else if (event.target.classList.contains('tab-item')) {
@@ -20,18 +20,20 @@ document.addEventListener('click', (event) => {
 
 
 function init() {
-  for (var i = 0; i < coins.length; i++) {
-    updateCrypto(coins[i])
-  }
+  update()
 
   var coinElems = document.querySelectorAll('.coin')
-
   for (var i = 0; i < coinElems.length; i++) {
     coinElems[i].addEventListener('click', function() {
       switchCrypto(this)
     })
   }
+}
 
+function update() {
+  for (var i = 0; i < coins.length; i++) {
+    updateCrypto(coins[i])
+  }
 }
 
 const updateCrypto = (coin) => {
@@ -83,7 +85,7 @@ const updateView = (coin, crypto) => {
 
 // Refresh currency every 10 minutes
 const oneMinute = 10 * 60 * 100
-setInterval(init, oneMinute)
+setInterval(update, oneMinute)
 
 
 function switchLocalCurrency(event) {
@@ -94,7 +96,7 @@ function switchLocalCurrency(event) {
   }
   event.target.classList.add('active')
   currency = local
-  init()
+  update()
 }
 
 function switchCrypto(elem) {
@@ -105,7 +107,7 @@ function switchCrypto(elem) {
   }
   elem.classList.add('active')
   usercrypto = curr
-  init()
+  update()
 }
 
 

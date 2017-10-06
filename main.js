@@ -150,7 +150,3 @@ ipcMain.on('crypto-updated', (event, crypto, currency, coin) => {
   tray.setImage(path.join(assetsDirectory, 'bitcoin.png'))
 
 })
-
-ipcMain.on('open-error-dialog', function (event, i) {
-  dialog.showErrorBox('Tab', i)
-})
