@@ -1,7 +1,7 @@
 {
   "name": "bitdock",
   "productName": "Bitdock",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "main.js",
   "license": "MIT",
   "author": "Chris Underdown",
