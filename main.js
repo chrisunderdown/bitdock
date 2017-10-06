@@ -112,20 +112,40 @@ ipcMain.on('show-window', () => {
 
 ipcMain.on('crypto-updated', (event, crypto, currency, coin) => {
   // Update icon and title in tray
-  switch(currency) {
-    case 'USD':
-      tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
-      break;
-    case 'GBP':
-      tray.setTitle(`${coin} £${Math.round(crypto.GBP)}`)
-      break;
-    case 'EUR':
-      tray.setTitle(`${coin} €${Math.round(crypto.EUR)}`)
-      break;
+  if ( coin === 'XRP') {
+    switch(currency) {
+      case 'USD':
+        tray.setTitle(`${coin} $${crypto.USD.toFixed(2)}`)
+        break;
+      case 'GBP':
+        tray.setTitle(`${coin} £${crypto.GBP.toFixed(2)}`)
+        break;
+      case 'EUR':
+        tray.setTitle(`${coin} €${crypto.EUR.toFixed(2)}`)
+        break;
 
-    default:
-      tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
+      default:
+        tray.setTitle(`${coin} $${crypto.USD.toFixed(2)}`)
+    }
   }
+
+  else {
+    switch(currency) {
+      case 'USD':
+        tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
+        break;
+      case 'GBP':
+        tray.setTitle(`${coin} £${Math.round(crypto.GBP)}`)
+        break;
+      case 'EUR':
+        tray.setTitle(`${coin} €${Math.round(crypto.EUR)}`)
+        break;
+
+      default:
+        tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
+    }
+  }
+
 
   tray.setImage(path.join(assetsDirectory, 'bitcoin.png'))
 

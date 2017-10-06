@@ -182,6 +182,7 @@
   border-radius: 3px;
   margin: 10px;
   transition: 0.25s;
+  border: 1px solid #141414;
 }
 
 .coin:hover {
@@ -204,9 +205,25 @@
 }
 
 .circle.BTC {
-  background: #FF9F00;
+  background: #FF8E00;
 }
 
 .circle.ETH {
   background: #858585;
+}
+
+.circle.LTC {
+  background: #CCCCCC;
+}
+
+.circle.DASH {
+  background: #1764CB;
+}
+
+.circle.ZEC {
+  background: #FFD900;
+}
+
+.circle.XRP {
+  background: #45ACDE;
 }

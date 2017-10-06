@@ -1,5 +1,5 @@
 const {ipcRenderer, shell} = require('electron')
-var coins = ['BTC','ETH']
+var coins = ['BTC','ETH', 'LTC', 'DASH', 'ZEC', 'XRP']
 var currency = 'USD'
 var usercrypto = 'BTC'
 
@@ -14,15 +14,24 @@ document.addEventListener('click', (event) => {
     window.close()
   } else if (event.target.classList.contains('tab-item')) {
     switchLocalCurrency(event)
-  } else if (event.target.classList.contains('coin')) {
-    switchCrypto(event)
   }
 })
+
+
 
 function init() {
   for (var i = 0; i < coins.length; i++) {
     updateCrypto(coins[i])
   }
+
+  var coinElems = document.querySelectorAll('.coin')
+
+  for (var i = 0; i < coinElems.length; i++) {
+    coinElems[i].addEventListener('click', function() {
+      switchCrypto(this)
+    })
+  }
+
 }
 
 const updateCrypto = (coin) => {
@@ -57,9 +66,18 @@ const updateCrypto = (coin) => {
 
 const updateView = (coin, crypto) => {
   document.querySelector('.js-summary').textContent = ''
-  document.querySelector(`.${coin}-js-usd`).textContent = `$${Math.round(crypto.USD)}`
-  document.querySelector(`.${coin}-js-gbp`).textContent = `£${Math.round(crypto.GBP)}`
-  document.querySelector(`.${coin}-js-eur`).textContent = `€${Math.round(crypto.EUR)}`
+  if (coin === 'XRP') {
+    document.querySelector(`.${coin}-js-usd`).textContent = `$${crypto.USD.toFixed(2)}`
+    document.querySelector(`.${coin}-js-gbp`).textContent = `£${crypto.GBP.toFixed(2)}`
+    document.querySelector(`.${coin}-js-eur`).textContent = `€${crypto.EUR.toFixed(2)}`
+  }
+
+  else {
+    document.querySelector(`.${coin}-js-usd`).textContent = `$${Math.round(crypto.USD)}`
+    document.querySelector(`.${coin}-js-gbp`).textContent = `£${Math.round(crypto.GBP)}`
+    document.querySelector(`.${coin}-js-eur`).textContent = `€${Math.round(crypto.EUR)}`
+  }
+
 }
 
 
@@ -79,13 +97,13 @@ function switchLocalCurrency(event) {
   init()
 }
 
-function switchCrypto(event) {
+function switchCrypto(elem) {
   var currencies = document.querySelectorAll('.coin')
-  var curr = event.target.dataset.coin
+  var curr = elem.dataset.coin
   for (var i = 0; i < currencies.length; i++) {
     currencies[i].classList.remove('active')
   }
-  event.target.classList.add('active')
+  elem.classList.add('active')
   usercrypto = curr
   init()
 }
