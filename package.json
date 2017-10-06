@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/chrisunderdown/bitdock#readme",
   "devDependencies": {
+    "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^7.3.0",
     "electron-prebuilt": "^1.2.7"
   },
