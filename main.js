@@ -81,6 +81,7 @@ const createWindow = () => {
       backgroundThrottling: false
     }
   })
+  window.setVisibleOnAllWorkspaces(true);
   window.loadURL(`file://${path.join(__dirname, 'index.html')}`)
 
   // Hide the window when it loses focus
