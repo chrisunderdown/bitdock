@@ -3,6 +3,7 @@ var coins = ['BTC','ETH', 'LTC', 'DASH', 'ZEC', 'XRP']
 var currency = 'USD'
 var usercrypto = 'BTC'
 
+
 document.addEventListener('click', (event) => {
   if (event.target.href) {
     // Open links in external browser
@@ -37,9 +38,8 @@ function update() {
 }
 
 const updateCrypto = (coin) => {
-
   // const url = `https://api.coindesk.com/v1/bpi/currentprice.json`
-  const url = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=GBP,USD,EUR`
+  const url = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=GBP,USD,EUR,AUD`
 
   fetch(url)
   .then(
@@ -72,20 +72,17 @@ const updateView = (coin, crypto) => {
     document.querySelector(`.${coin}-js-usd`).textContent = `$${crypto.USD.toFixed(2)}`
     document.querySelector(`.${coin}-js-gbp`).textContent = `£${crypto.GBP.toFixed(2)}`
     document.querySelector(`.${coin}-js-eur`).textContent = `€${crypto.EUR.toFixed(2)}`
+    document.querySelector(`.${coin}-js-aud`).textContent = `$${crypto.AUD.toFixed(2)}`
   }
 
   else {
     document.querySelector(`.${coin}-js-usd`).textContent = `$${Math.round(crypto.USD)}`
     document.querySelector(`.${coin}-js-gbp`).textContent = `£${Math.round(crypto.GBP)}`
     document.querySelector(`.${coin}-js-eur`).textContent = `€${Math.round(crypto.EUR)}`
+    document.querySelector(`.${coin}-js-aud`).textContent = `$${Math.round(crypto.AUD)}`
   }
 
 }
-
-
-// Refresh currency every 10 minutes
-const oneMinute = 10 * 60 * 100
-setInterval(update, oneMinute)
 
 
 function switchLocalCurrency(event) {
@@ -110,7 +107,29 @@ function switchCrypto(elem) {
   update()
 }
 
+function checkVersion() {
+  fetch('https://raw.githubusercontent.com/chrisunderdown/bitdock/master/package.json')
+  .then(
+    function(response) {
+      response.json().then(function(pkg) {
+        const version = pkg.version
+        console.log(version)
+        ipcRenderer.send('check-version', version)
+      })
+    }
+  )
+}
+
+ipcRenderer.on('show-update', function (event) {
+  var dialog = document.querySelector('.update')
+  dialog.classList.add('show')
+})
 
 
+const oneMinute = 10 * 60 * 100
+// Refresh currency every minute
+setInterval(update, oneMinute)
+// Check version every minute
+setInterval(checkVersion, oneMinute)
 // Update initial currency when loaded
 document.addEventListener('DOMContentLoaded', init)

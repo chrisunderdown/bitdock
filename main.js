@@ -1,7 +1,9 @@
-const {app, BrowserWindow, ipcMain, Tray} = require('electron')
-const dialog = require('electron').dialog
+const {app, BrowserWindow, ipcMain, Tray, dialog, shell} = require('electron')
 const path = require('path')
 const AutoLaunch = require('auto-launch')
+const semver = require('semver')
+
+
 
 var appPath = app.getPath('exe').split('.app/Content')[0] + '.app';
 var bitdockAutoLauncher = new AutoLaunch({
@@ -124,6 +126,10 @@ ipcMain.on('crypto-updated', (event, crypto, currency, coin) => {
         tray.setTitle(`${coin} €${crypto.EUR.toFixed(2)}`)
         break;
 
+      case 'AUD':
+        tray.setTitle(`${coin} $${crypto.AUD.toFixed(2)}`)
+        break;
+
       default:
         tray.setTitle(`${coin} $${crypto.USD.toFixed(2)}`)
     }
@@ -140,7 +146,9 @@ ipcMain.on('crypto-updated', (event, crypto, currency, coin) => {
       case 'EUR':
         tray.setTitle(`${coin} €${Math.round(crypto.EUR)}`)
         break;
-
+      case 'AUD':
+        tray.setTitle(`${coin} $${Math.round(crypto.AUD)}`)
+        break;
       default:
         tray.setTitle(`${coin} $${Math.round(crypto.USD)}`)
     }
@@ -148,5 +156,15 @@ ipcMain.on('crypto-updated', (event, crypto, currency, coin) => {
 
 
   tray.setImage(path.join(assetsDirectory, 'bitcoin.png'))
+
+})
+
+ipcMain.on('check-version', (event, version) => {
+  const current = app.getVersion()
+  const latest = version
+
+  if(semver.lt(current, latest)) {
+    event.sender.send('show-update')
+  }
 
 })
